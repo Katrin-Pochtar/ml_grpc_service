@@ -1,10 +1,10 @@
 import grpc, os
 from concurrent import futures
-from ml_grpc_service import model_pb2, model_pb2_grpc
-from ml_grpc_service.server.inference import ModelRunner
-from ml_grpc_service.server.validation import features_to_dict, ValidationError
+from protos import model_pb2, model_pb2_grpc  # Imports from root
+from server.inference import ModelRunner
+from server.validation import features_to_dict, ValidationError
 
-MODEL_PATH = os.getenv("MODEL_PATH", "ml_grpc_service/models/model.pkl")
+MODEL_PATH = os.getenv("MODEL_PATH", "models/model.pkl")
 MODEL_VERSION = os.getenv("MODEL_VERSION", "v1.0.0")
 MAX_WORKERS = int(os.getenv("MAX_WORKERS", "4"))
 PORT = int(os.getenv("PORT", "50051"))
@@ -17,6 +17,10 @@ class PredictionService(model_pb2_grpc.PredictionServiceServicer):
         return model_pb2.HealthResponse(status="ok", model_version=self.runner.version)
 
     def Predict(self, request, context):
+        import os, time
+        sleep_ms = int(os.getenv('SLEEP_MS', '0'))
+        if sleep_ms > 0:
+            time.sleep(sleep_ms / 1000.0)
         try:
             feats = features_to_dict(request.features)
             pred, conf = self.runner.predict(feats)

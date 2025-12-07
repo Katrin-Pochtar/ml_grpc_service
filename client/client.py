@@ -1,5 +1,5 @@
 import grpc
-from ml_grpc_service import model_pb2, model_pb2_grpc
+from protos import model_pb2, model_pb2_grpc  # Imports from root
 
 def make_stub(addr: str = "localhost:50051"):
     channel = grpc.insecure_channel(addr)

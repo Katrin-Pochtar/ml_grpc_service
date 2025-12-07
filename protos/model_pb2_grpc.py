@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from ml_grpc_service import model_pb2 as model__pb2
+from protos import model_pb2 as protos_dot_model__pb2
 
 GRPC_GENERATED_VERSION = '1.66.1'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in model_pb2_grpc.py depends on'
+        + f' but the generated code in protos/model_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,13 +36,13 @@ class PredictionServiceStub(object):
         """
         self.Health = channel.unary_unary(
                 '/mlservice.v1.PredictionService/Health',
-                request_serializer=model__pb2.HealthRequest.SerializeToString,
-                response_deserializer=model__pb2.HealthResponse.FromString,
+                request_serializer=protos_dot_model__pb2.HealthRequest.SerializeToString,
+                response_deserializer=protos_dot_model__pb2.HealthResponse.FromString,
                 _registered_method=True)
         self.Predict = channel.unary_unary(
                 '/mlservice.v1.PredictionService/Predict',
-                request_serializer=model__pb2.PredictRequest.SerializeToString,
-                response_deserializer=model__pb2.PredictResponse.FromString,
+                request_serializer=protos_dot_model__pb2.PredictRequest.SerializeToString,
+                response_deserializer=protos_dot_model__pb2.PredictResponse.FromString,
                 _registered_method=True)
 
 
@@ -66,13 +66,13 @@ def add_PredictionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Health': grpc.unary_unary_rpc_method_handler(
                     servicer.Health,
-                    request_deserializer=model__pb2.HealthRequest.FromString,
-                    response_serializer=model__pb2.HealthResponse.SerializeToString,
+                    request_deserializer=protos_dot_model__pb2.HealthRequest.FromString,
+                    response_serializer=protos_dot_model__pb2.HealthResponse.SerializeToString,
             ),
             'Predict': grpc.unary_unary_rpc_method_handler(
                     servicer.Predict,
-                    request_deserializer=model__pb2.PredictRequest.FromString,
-                    response_serializer=model__pb2.PredictResponse.SerializeToString,
+                    request_deserializer=protos_dot_model__pb2.PredictRequest.FromString,
+                    response_serializer=protos_dot_model__pb2.PredictResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -100,8 +100,8 @@ class PredictionService(object):
             request,
             target,
             '/mlservice.v1.PredictionService/Health',
-            model__pb2.HealthRequest.SerializeToString,
-            model__pb2.HealthResponse.FromString,
+            protos_dot_model__pb2.HealthRequest.SerializeToString,
+            protos_dot_model__pb2.HealthResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -127,8 +127,8 @@ class PredictionService(object):
             request,
             target,
             '/mlservice.v1.PredictionService/Predict',
-            model__pb2.PredictRequest.SerializeToString,
-            model__pb2.PredictResponse.FromString,
+            protos_dot_model__pb2.PredictRequest.SerializeToString,
+            protos_dot_model__pb2.PredictResponse.FromString,
             options,
             channel_credentials,
             insecure,
