@@ -17,6 +17,7 @@ ml_grpc_service/
 ├── requirements.txt
 ├── Dockerfile
 └── README.md
+```
 
 ## Описание проекта
 
