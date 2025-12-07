@@ -51,5 +51,9 @@ python -m client.client
 
 ### 1\. Успешный запуск контейнера и проверка Health
 
+<img width="963" height="97" alt="Screenshot 2025-12-06 at 19 50 42" src="https://github.com/user-attachments/assets/14ac9fa2-cf9b-43de-b78b-d6b58fcb8ac8" />
 
 ### 2\. Работа Python-клиента (Predict)
+
+<img width="766" height="81" alt="Screenshot 2025-12-06 at 19 47 15" src="https://github.com/user-attachments/assets/7117f1fd-c35a-4579-80d5-9365063279be" />
+
